@@ -1,0 +1,23 @@
+BoxLayout:
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+  
+    GridLayout:
+        rows: 2
+        cols: 2
+        padding: 10
+        spacing: 10
+        row_default_height: 30
+        Label:
+            text: 'Username'
+        TextInput:
+            id: usernamevalue
+        Label:
+            text: 'Password'
+        TextInput:
+            id: passwordvalue
+            password: True
+    Button:
+        text: 'Login'
+        on_press: app.login_button_action()

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script> 
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        #result {
+            font-size: 1.2em;
+        }
+
+        .btn {
+            width:200px; 
+            float: left;
+            color:white;
+            background: #aaa;
+            border: 5px solid #aaa;
+            border-radius: 6px;
+
+            padding: 8px 8px;
+            text-align: center;
+            display: inline-block;
+            font-size: 1.2em;
+            margin: 4px 2px;
+            -webkit-transition-duration: 0.4s;
+            /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+
+
+    </style>
+    <body>
+
+
+    <div>
+        <div id="result">
+            Prediction Result
+        </div>
+
+        <div onclick="go_fetch();" class="btn btn1">Predict</div>
+        <div style="clear:both;"></div>
+        <div onclick="clear();background(0);" class="btn btn1">
+            Clear Canvas
+        </div>
+        <div style="clear:both;"></div>
+        <canvas id="canvas_parking" width="300px" height="400px"></canvas>
+    </div>
+
+    <script>
+        function setup() {
+            pixelDensity(1)
+            var canvas = document.getElementById("canvas_parking");
+            if(canvas.getContext){
+                var draw = canvas.getContext("2d");
+                var img = new Image();
+                img.src = "images/car_parking3.jpg";
+                img.onload = function(){
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    //drawImage(이미지객체, 사각형 왼위 x, 사각형 왼위 y, 가로크기, 세로크기)
+                    draw.drawImage(img, 0, 0);
+                }
+            }    
+        }
+
+        function touchMoved() {
+            strokeWeight(40);
+            stroke(256);
+            line(mouseX, mouseY, pmouseX, pmouseY);
+            return false;
+
+        }
+        var url = 'http://modelservice.hdp.cloudexchange.co.kr/model';
+        var api_key = "m3s3i4ig6atyffm4pgib4ugaij7yfsqz"
+      
+        function go_fetch() {
+            d3.select("#result").text("That looks like a ...");
+            var canvas = document.getElementById("canvas_parking");
+            var post_data = {
+                accessKey:api_key,
+                request: { image : canvas.toDataURL() }
+            };
+
+            fetch(url, {
+                    method: 'POST', // or 'PUT'
+                    body: JSON.stringify(post_data), // data can be `string` or {object}!
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(res => res.json())
+                .then(response => d3.select("#result").text("That looks like a " + JSON.parse(response.response).prediction))
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<MyTile@SmartTileWithStar>
+    size_hint_y: None
+    height: "240dp"
+    on_press: app.image_button_action()
+
+MDBoxLayout:
+    orientation: 'vertical'
+
+    property_parking_result:parking_result
+
+    MDGridLayout:
+        cols: 3
+        rows: 2
+        adaptive_height: True
+        padding: dp(4), dp(4)
+        spacing: dp(4)
+
+        MyTile:
+            source: "images/car_parking1.jpg"
+            text: "[size=26]Parking 1[/size][size=14]images/car_parking1.jpg[/size]"
+            
+        MyTile:
+            source: "images/car_parking2.jpg"
+            text: "[size=26]Parking 2[/size][size=14]images/car_parking2.jpg[/size]"
+            tile_text_color: app.theme_cls.accent_color
+         
+        MyTile:
+            source: "images/car_parking3.jpg"
+            text: "[size=26][color=#ffffff]Parking 3[/color][/size][size=14]images/car_parking3.jpg[/size]"
+            tile_text_color: app.theme_cls.accent_color
+
+        MDRectangleFlatButton:
+            text: 'Parking Request'
+            width: 
+            halign: "center"
+            on_press: app.parking_check_button_action(req_image='images/car_parking1.jpg')
+
+        MDRectangleFlatButton:
+            text: 'Parking Request'
+            halign: "center"
+            on_press: app.parking_check_button_action(req_image='images/car_parking2.jpg')
+           
+        MDRectangleFlatButton:
+            text: 'Parking Request'
+            halign: "center"
+            on_press: app.parking_check_button_action(req_image='images/car_parking3.jpg')
+    
+    MDLabel:
+        id: parking_result
+        text: '[size=16][color=#000000][/color][/size]'
+        markup: True
+        text_size: self.width-20, self.height-20
+        valign: 'middle'
+        halign: 'center'

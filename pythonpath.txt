@@ -1,0 +1,2 @@
+C:\Users\user\AppData\Local\Programs\Python\Python37\Scripts
+C:\Users\user\AppData\Local\Programs\Python\Python37\python setup.py install

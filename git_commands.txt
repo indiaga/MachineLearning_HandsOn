@@ -1,0 +1,5 @@
+1. Local Git : (Master Branch) D:\GitWorkspace
+2. Staging : git add .
+3. Commit : git commit -m 'First Commit'
+4. Remote Connect : git remote add indiaga_ml https://github.com/indiaga/MachineLearning_HandsOn.git  
+5. Remote Commit : git push -u indiaga_ml master   

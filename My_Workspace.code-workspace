@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\MyPython\\BookSource\\Transfer-Learning-Book"
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}
